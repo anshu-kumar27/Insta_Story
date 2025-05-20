@@ -97,29 +97,35 @@ This project implements a mobile-first story viewer similar to Instagram Stories
 
 ## File Structure
 ```
-  /src
-    /components
-      Stories.tsx -> All the user details are mapped to the skeleton
-      StoriesSkeleton.tsx -> preview of all the users (onclick will result in opening the story)
-      /viewStory (in this folder the structure of story view is defined with all the logics)
-        StoryView.tsx 
-        imageLoad.ts
-    /data
-      StoryData.ts -> all the data related to user's story, name , avatar
-    /styles
-      imageLoading -> loading home screen animation
-      story.css -> all the animation related to stories are here
-    /loading
-      ImageLoading.tsx -> home screen loading bar
-    /utils
-      Constants.ts -> all the constants like url and details (acting like a temporary env)
-    /tests
-      example.spec.ts -> for playwright testing
-  
-  playwright.config.ts
-  package.json
-  README.md
+├── src
+│   ├── components
+│   │   ├── Stories.tsx              # Maps user data to the story skeleton UI
+│   │   ├── StoriesSkeleton.tsx      # Displays user previews; clicking opens their story
+│   │   └── viewStory/               # Logic and layout for viewing individual stories
+│   │       ├── StoryView.tsx
+│   │       └── imageLoad.ts
+│   │
+│   ├── data
+│   │   └── StoryData.ts             # Static data for user stories, avatars, and metadata
+│   │
+│   ├── styles
+│   │   ├── imageLoading.css         # Animation styles for image loading (home screen)
+│   │   └── story.css                # Story progress bar and transition animations
+│   │
+│   ├── loading
+│   │   └── ImageLoading.tsx         # Skeleton loader shown before main image renders
+│   │
+│   ├── utils
+│   │   └── Constants.ts             # Constants like base URLs; acts as a temporary env
+│   │
+│   └── tests
+│       └── example.spec.ts          # Playwright test suite for user interaction testing
+│
+├── playwright.config.ts             # Playwright configuration for end-to-end testing
+├── package.json                     # Project dependencies and scripts
+└── README.md                        # Project overview and documentation
 ```
+
 ---
 
 ### Design Choices & Performance Optimizations
