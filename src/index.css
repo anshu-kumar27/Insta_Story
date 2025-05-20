@@ -1,0 +1,20 @@
+body{
+  padding:15px;
+  margin:0px;
+}
+
+.instagram-txt{
+  padding:0px 15px 0px 15px;
+  font-family: 'Lobster', cursive;
+  font-size: 3rem;
+  color:black
+}
+
+.story-media-loader {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #ccc;
+  border-top: 4px solid #cb43bd; /* Instagram-like color */
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}

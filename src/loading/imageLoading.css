@@ -1,0 +1,23 @@
+.loader {
+    /* display: inline-block; */
+    font-size: 100px;
+    animation: spin linear 1s infinite;
+    color: purple;
+}
+.loadingContainer{
+    position: fixed;
+    display: flex;
+    width: 100vw;
+    height: 100dvh;
+    justify-content: center;
+    align-items: center;
+}
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
