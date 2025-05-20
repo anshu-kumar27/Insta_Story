@@ -100,12 +100,12 @@ This project implements a mobile-first story viewer similar to Instagram Stories
    ```
 
 ## File Structure
-
+```
   /src
     /components
       Stories.tsx -> All the user details are mapped to the skeleton
       StoriesSkeleton.tsx -> preview of all the users (onclick will result in opening the story)
-      /viewStory (view story is the way story gets displayed when someone clicks to view the story)
+      /viewStory (in this folder the structure of story view is defined with all the logics)
         StoryView.tsx 
         imageLoad.ts
     /data
@@ -123,41 +123,42 @@ This project implements a mobile-first story viewer similar to Instagram Stories
   playwright.config.ts
   package.json
   README.md
-
+```
+---
 
 ### Design Choices & Performance Optimizations
-1. UI & Layout
+## UI & Layout
 The entire UI is built using CSS Flexbox to ensure responsive, flexible, and mobile-friendly layouts without heavy dependencies. This approach guarantees smooth rendering and easy adaptability across different screen sizes, focusing on mobile as per the requirements.
 
-2. Media & Avatar Loading Handling
+## Media & Avatar Loading Handling
 To enhance user experience, loading placeholders (skeletons and loaders) are shown while images and avatars are loading. This prevents any flicker display of incomplete or broken images, making transitions seamless and visually pleasant.
 
 implement a loading timeout fallback to handle cases where images fail to load or take too long, ensuring the app does not hang indefinitely and maintains responsiveness.
 
-3. Story Viewing & Navigation Logic
-Story previews and details are mapped to a skeleton component that displays the list of stories. Clicking a user activates a controlled index value to show the corresponding story.
+## Story Viewing & Navigation Logic
+1. Story previews and details are mapped to a skeleton component that displays the list of stories. Clicking a user activates a controlled index value to show the corresponding story.
+2. Closing a story resets this index to null, which cleanly returns the user to the story list.
+3. Clickable areas are positioned absolutely on the left and right sides of the story view. When the user taps the left area, the current story index decreases by 1, and when the right area is tapped, the index increases by 1.
+4. To prevent out-of-bound errors (overflows): The left click only decreases the index if it is greater than 0, ensuring it never goes below the first story / The right click only increases the index if it is less than the total number of stories minus one (totalLength - 1), preventing it from exceeding the last story.
 
-Closing a story resets this index to null, which cleanly returns the user to the story list.
+## Accurate Timing & Synchronization
+1. We use performance.now() to track story start times precisely, improving the accuracy of story progression and pause/resume mechanics.
+2. When the user pauses the story (e.g., pressing and holding), we record the pause time and calculate the exact elapsed time by subtracting the start time from the pause time.
+3. The remaining display duration is recalculated by subtracting elapsed time from the total duration (5 seconds), ensuring the progress bar and story timer stay perfectly in sync.
+4. All active timers are cleared before starting new ones to avoid timer overlap or race conditions that could cause inconsistent story transitions.
+   
+## Media Loading Optimization
+1. Story timers and progress bars only start after the media (image) has fully loaded, guaranteeing users get the full 5 seconds of viewing time for the actual content, not the loading screen.
+2. This optimization prevents premature story advancement and improves user engagement by ensuring content readiness before timing starts.
 
-Clickable areas are positioned absolutely on the left and right sides of the story view. When the user taps the left area, the current story index decreases by 1, and when the right area is tapped, the index increases by 1.
+---
 
-To prevent out-of-bound errors (overflows):
+## 🖼️ Screenshots
 
-The left click only decreases the index if it is greater than 0, ensuring it never goes below the first story.
+Here are a few glimpses of the stories in action:
 
-The right click only increases the index if it is less than the total number of stories minus one (totalLength - 1), preventing it from exceeding the last story.
+### 🏠 Homepage
+![](assets/ss1.jpeg)
 
-4. Accurate Timing & Synchronization
-We use performance.now() to track story start times precisely, improving the accuracy of story progression and pause/resume mechanics.
-
-When the user pauses the story (e.g., pressing and holding), we record the pause time and calculate the exact elapsed time by subtracting the start time from the pause time.
-
-The remaining display duration is recalculated by subtracting elapsed time from the total duration (5 seconds), ensuring the progress bar and story timer stay perfectly in sync.
-
-All active timers are cleared before starting new ones to avoid timer overlap or race conditions that could cause inconsistent story transitions.
-
-5. Media Loading Optimization
-
-Story timers and progress bars only start after the media (image) has fully loaded, guaranteeing users get the full 5 seconds of viewing time for the actual content, not the loading screen.
-
-This optimization prevents premature story advancement and improves user engagement by ensuring content readiness before timing starts.
+### 🔍 Story View
+![](assets/ss2.jpeg)
