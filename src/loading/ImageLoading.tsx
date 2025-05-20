@@ -1,4 +1,4 @@
-import './imageLoading.css'
+import '../styles/imageLoading.css'
 function ImageLoading() {
   return (
     <div className='loadingContainer'>

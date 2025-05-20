@@ -1,14 +1,13 @@
 .loader {
-    /* display: inline-block; */
     font-size: 100px;
     animation: spin linear 1s infinite;
     color: purple;
 }
 .loadingContainer{
-    position: fixed;
+    position: absolute;
     display: flex;
-    width: 100vw;
-    height: 100dvh;
+    width: 90%;
+    height: 96vh;
     justify-content: center;
     align-items: center;
 }

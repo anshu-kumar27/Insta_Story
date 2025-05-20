@@ -2,7 +2,7 @@ import { useState } from "react"
 import { StoryData } from "../data/StoryData";
 import type { Story } from "../data/StoryData";
 import StorySkeleton from "./StoriesSkeleton";
-import './story.css'
+import '../styles/story.css'
 import StoryView from "./viewStory/StoryView";
 
 function Stories() {

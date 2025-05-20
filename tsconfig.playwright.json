@@ -1,0 +1,13 @@
+// tsconfig.playwright.json
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "strict": true,
+    "esModuleInterop": true,
+    "types": ["playwright", "node"],
+    "noEmit": true
+  },
+  "include": ["playwright.config.ts", "src/tests"]
+}

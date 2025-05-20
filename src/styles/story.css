@@ -71,8 +71,18 @@
   z-index: 9999;
 }
 
+@keyframes opacity {
+  from{
+    opacity: 0;
+  }
+  to{
+    opacity: 1;
+  }
+}
+
 .story-header {
   display: flex;
+  animation: opacity 0.5s ease-in-out;
   justify-content: space-between;
   align-items: center;
   padding: 15px 20px;
@@ -138,6 +148,7 @@
 /* Story image area */
 .story-content {
   flex: 1;
+  animation: opacity 0.5s ease-in-out;
   width: 100%;
   height: 100%;
   overflow: hidden;

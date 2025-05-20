@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import type { Story } from "../../data/StoryData";
 import { DURATION, USERID } from "../../utils/Constants";
+import { Imageload } from "./ImageLoad";
 
 interface StoryViewerProps {
   storyList: Story[];
@@ -21,7 +22,7 @@ const StoryView: React.FC<StoryViewerProps> = ({
   const userId = USERID;
 
   const [isPaused, setIsPaused] = useState(false);
-  const [isStoryMediaLoaded, setIsStoryMediaLoaded] = useState(false);
+  const [mediaLoaded,setMediaLoaded] = Imageload(story.media);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const startTimeRef = useRef<number | null>(null);
   const pauseStartTimeRef = useRef<number | null>(null);
@@ -45,19 +46,19 @@ const StoryView: React.FC<StoryViewerProps> = ({
   useEffect(() => {
     clearStoryTimer();
     setIsPaused(true);
-    setIsStoryMediaLoaded(false);
+    setMediaLoaded(false);
     startTimeRef.current = null;
     pauseStartTimeRef.current = null;
   }, [activeStoryIndex]);
 
   useEffect(() => {
-    if (isStoryMediaLoaded) {
+    if (mediaLoaded) {
       setIsPaused(false);
       const now = performance.now();
       startTimeRef.current = now;
       startStoryTimer(durationMs);
     }
-  }, [isStoryMediaLoaded]);
+  }, [mediaLoaded]);
 
   const handleHoldStart = () => {
     setIsPaused(true);
@@ -78,22 +79,7 @@ const StoryView: React.FC<StoryViewerProps> = ({
     }
   };
 
-  //  image loading screen incase of failure to prevent endless loading... 
-  useEffect(() => {
-    const img = new Image();
-    img.src = story.media;
-    if (img.complete) {
-      setIsStoryMediaLoaded(true);
-    }
-
-    const timeout = setTimeout(() => {
-      setIsStoryMediaLoaded(true);
-    }, 5000);
-
-    return () => clearTimeout(timeout);
-  }, [story.media]);
-
-  // handing close removing everything... 
+  // resetting everything when user clicks on close btn... 
   const handleClose = () => {
     clearStoryTimer();
     setIsPaused(true);
@@ -101,7 +87,7 @@ const StoryView: React.FC<StoryViewerProps> = ({
   };
 
   return (
-    <div className="story-viewer-modal">
+    <div className="story-viewer-modal" key={activeStoryIndex}>
       {/* header- includes (pfp name and cross symbol) */}
       <div className="story-header">
         <div className="story-user-info">
@@ -130,16 +116,16 @@ const StoryView: React.FC<StoryViewerProps> = ({
         onTouchEnd={handleHoldEnd}
       >
 
-        {!isStoryMediaLoaded && <div className="story-media-loader"></div>}
+        {!mediaLoaded && <div className="story-media-loader"></div>}
 
         <img
           key={story.media}
           src={story.media}
           alt="Story media"
           onContextMenu={(e) => e.preventDefault()}
-          onLoad={() => setIsStoryMediaLoaded(true)}
-          onError={() => setIsStoryMediaLoaded(true)}
-          style={{ display: isStoryMediaLoaded ? "block" : "none" }}
+          onLoad={() => setMediaLoaded(true)}
+          onError={() => setMediaLoaded(true)}
+          style={{ display: mediaLoaded ? "block" : "none" }}
         />
 
         {/* story controls -> left and right */}
