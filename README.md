@@ -32,10 +32,6 @@ This project implements a mobile-first story viewer similar to Instagram Stories
 
 ## Getting Started
 
-### Prerequisites
-
-- Node.js (version 16 or above recommended)
-
 ### Installation
 
 1. Clone this repository:
@@ -128,7 +124,7 @@ This project implements a mobile-first story viewer similar to Instagram Stories
 
 ### Design Choices & Performance Optimizations
 ## UI & Layout
-The entire UI is built using CSS Flexbox to ensure responsive, flexible, and mobile-friendly layouts without heavy dependencies. This approach guarantees smooth rendering and easy adaptability across different screen sizes, focusing on mobile as per the requirements.
+The entire UI is built using CSS Flexbox to ensure responsive, flexible, and mobile-friendly layouts.
 
 ## Media & Avatar Loading Handling
 To enhance user experience, loading placeholders (skeletons and loaders) are shown while images and avatars are loading. This prevents any flicker display of incomplete or broken images, making transitions seamless and visually pleasant.
@@ -157,8 +153,15 @@ implement a loading timeout fallback to handle cases where images fail to load o
 
 Here are a few glimpses of the stories in action:
 
-### 🏠 Homepage
-![](assets/ss2.jpeg)
-
-### 🔍 Story View
-![](assets/ss1.jpeg)
+<table>
+  <tr>
+    <td width="50%">
+      <p><strong>🏠 Homepage</strong></p>
+      <img src="assets/ss2.jpeg" alt="Homepage" height="300"/>
+    </td>
+    <td width="50%">
+      <p><strong>🔍 Story View</strong></p>
+      <img src="assets/ss1.jpeg" alt="Story View" height="300"/>
+    </td>
+  </tr>
+</table>
