@@ -158,7 +158,7 @@ implement a loading timeout fallback to handle cases where images fail to load o
 Here are a few glimpses of the stories in action:
 
 ### 🏠 Homepage
-![](assets/ss1.jpeg)
+![](assets/ss2.jpeg)
 
 ### 🔍 Story View
-![](assets/ss2.jpeg)
+![](assets/ss1.jpeg)
